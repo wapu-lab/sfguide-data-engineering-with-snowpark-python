@@ -5,7 +5,9 @@ channels:
 dependencies:
   - python=3.8
   - snowflake-snowpark-python
+  - scipy
   - pip
   - pip:
     # Snowflake
     - snowflake-cli-labs==0.2.9
+    - pandas==2.0.3

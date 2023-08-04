@@ -49,9 +49,9 @@ def merge_daily_city_metrics(session):
                                         F.col("COUNTRY").alias("COUNTRY_DESC"), F.col("DAILY_SALES"))
 #    orders.limit(5).show()
 
-    weather_pc = session.table("FROSTBYTE_WEATHERSOURCE.ONPOINT_ID.POSTAL_CODES")
+    weather_pc = session.table("WEATHER_SOURCE_LLC_FROSTBYTE.ONPOINT_ID.POSTAL_CODES")
     countries = session.table("RAW_POS.COUNTRY")
-    weather = session.table("FROSTBYTE_WEATHERSOURCE.ONPOINT_ID.HISTORY_DAY")
+    weather = session.table("WEATHER_SOURCE_LLC_FROSTBYTE.ONPOINT_ID.HISTORY_DAY")
     weather = weather.join(weather_pc, (weather['POSTAL_CODE'] == weather_pc['POSTAL_CODE']) & (weather['COUNTRY'] == weather_pc['COUNTRY']), rsuffix='_pc')
     weather = weather.join(countries, (weather['COUNTRY'] == countries['ISO_COUNTRY']) & (weather['CITY_NAME'] == countries['CITY']), rsuffix='_c')
     weather = weather.join(orders_stream_dates, weather['DATE_VALID_STD'] == orders_stream_dates['DATE'])
